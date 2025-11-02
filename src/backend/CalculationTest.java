@@ -14,7 +14,8 @@ class CalculationTest {
 	public void testCalculateTie() {
 		assertTrue(calc.calculateResult(ROCK, ROCK) == "It's a tie!");
 		assertTrue(calc.calculateResult(PAPER, PAPER) == "It's a tie!");
-		assertTrue(calc.calculateResult(SCISSOR, SCISSOR) == "It's a tie!");	}
+		assertTrue(calc.calculateResult(SCISSOR, SCISSOR) == "It's a tie!");	
+	}
 	
 	@Test
 	public void testCalculatePlayer1Win() {

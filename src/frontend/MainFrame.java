@@ -1,5 +1,6 @@
 package frontend;
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -52,6 +53,7 @@ public class MainFrame implements ActionListener {
         cbPlayer1 = new JComboBox<>(choices);
         cbPlayer1.setVisible(false);
         lbPlayer1 = new JLabel("Player 1");
+        lbPlayer1.setFont(mainFont);
         lbPlayer1.setVisible(false);
         btValidatePlayer1 = new JButton("GO");
         btValidatePlayer1.setVisible(false);
@@ -61,6 +63,7 @@ public class MainFrame implements ActionListener {
         cbPlayer2 = new JComboBox<>(choices);
         cbPlayer2.setVisible(false);
         lbPlayer2 = new JLabel("Player 2");
+        lbPlayer2.setFont(mainFont);
         lbPlayer2.setVisible(false);
         btValidatePlayer2 = new JButton("GO");
         btValidatePlayer2.setVisible(false);
@@ -68,8 +71,8 @@ public class MainFrame implements ActionListener {
         
         // Winner label
         lbWinner = new JLabel();
+        lbWinner.setForeground(Color.red);
 
-        
         /*** Create panels ***/
         
         // Title panel
@@ -141,13 +144,24 @@ public class MainFrame implements ActionListener {
                 cbPlayer2.setEnabled(false);
 
                 /*** Create random choices for the player 1 and player 2 ***/
-                Choice computerChoice = choices[new Random().nextInt(choices.length)];
-                cbPlayer1.setSelectedItem(computerChoice);
+                Choice computerChoice1 = choices[new Random().nextInt(choices.length)];
+                cbPlayer1.setSelectedItem(computerChoice1);
                 Choice computerChoice2 = choices[new Random().nextInt(choices.length)];
                 cbPlayer2.setSelectedItem(computerChoice2);
                 
                 /*** Display the winner ***/
-                lbWinner.setText(calc.calculateResult(computerChoice, computerChoice2));
+                String calcResult = calc.calculateResult(computerChoice1, computerChoice2);
+                lbWinner.setText(calcResult);
+                if(calcResult == "Player 1 wins") {
+                	lbPlayer1.setForeground(Color.red);
+                	lbPlayer2.setForeground(Color.black);
+                } else if (calcResult == "Player 2 wins") {
+                	lbPlayer2.setForeground(Color.red);
+                	lbPlayer1.setForeground(Color.black);
+				} else {
+                	lbPlayer2.setForeground(Color.black);
+                	lbPlayer1.setForeground(Color.black);
+				}
 
             }
             if("1 Player".equals(cbMode.getSelectedItem().toString())) {
@@ -162,6 +176,8 @@ public class MainFrame implements ActionListener {
                 
                 /*** Reset the Winner label ***/
                 lbWinner.setText(null);
+                lbPlayer1.setForeground(Color.black); 
+                lbPlayer2.setForeground(Color.black);
                 
                 /*** Enable buttons ***/
                 cbPlayer1.setEnabled(true);
@@ -180,6 +196,8 @@ public class MainFrame implements ActionListener {
                 
                 /*** Reset the Winner label ***/
                 lbWinner.setText(null);
+                lbPlayer1.setForeground(Color.black); 
+                lbPlayer2.setForeground(Color.black);
                 
                 /*** Enable buttons ***/
                 cbPlayer1.setEnabled(true);
@@ -215,11 +233,18 @@ public class MainFrame implements ActionListener {
                 cbPlayer2.setEnabled(false);
                 
                 /*** Create random choices for the player 2 ***/
-                Choice computerChoice = choices[new Random().nextInt(choices.length)];
-                cbPlayer2.setSelectedItem(computerChoice);
+                Choice computerChoice2 = choices[new Random().nextInt(choices.length)];
+                cbPlayer2.setSelectedItem(computerChoice2);
                 
                 /*** Display the winner ***/
-                lbWinner.setText(calc.calculateResult((Choice) cbPlayer1.getSelectedItem(), computerChoice));
+                String calcResult = calc.calculateResult((Choice) cbPlayer1.getSelectedItem(), computerChoice2);
+                lbWinner.setText(calcResult);
+                
+                if(calcResult == "Player 1 wins") {
+                	lbPlayer1.setForeground(Color.red);
+                } else if (calcResult == "Player 2 wins") {
+                	lbPlayer2.setForeground(Color.red);
+				}
             }
             if("2 Players".equals(cbMode.getSelectedItem().toString())) {
                 
@@ -248,7 +273,13 @@ public class MainFrame implements ActionListener {
                 cbPlayer2.setEnabled(false);
 
                 /*** Display the winner ***/
-                lbWinner.setText(calc.calculateResult((Choice) cbPlayer1.getSelectedItem(), (Choice) cbPlayer2.getSelectedItem()));
+                String calcResult = calc.calculateResult((Choice) cbPlayer1.getSelectedItem(), (Choice) cbPlayer2.getSelectedItem());
+                lbWinner.setText(calcResult);
+                if(calcResult == "Player 1 wins") {
+                	lbPlayer1.setForeground(Color.red);
+                } else if (calcResult == "Player 2 wins") {
+                	lbPlayer2.setForeground(Color.red);
+				}
             }
         }
     }

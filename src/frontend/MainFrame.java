@@ -7,7 +7,10 @@ import java.awt.event.ActionListener;
 import java.util.Random;
 import javax.swing.*;
 import backend.Calculation;
-import enumerators.Choices;
+import enumerators.Choice;
+import static enumerators.Choice.ROCK;
+import static enumerators.Choice.PAPER;
+import static enumerators.Choice.SCISSOR;
 
 /* 
  * This class defines the UI elements and the actions
@@ -21,8 +24,8 @@ public class MainFrame implements ActionListener {
     private JLabel lbPlayer1;
     private JLabel lbPlayer2;
     private JComboBox<String> cbMode;
-    private JComboBox<Choices> cbPlayer1;
-    private JComboBox<Choices> cbPlayer2;
+    private JComboBox<Choice> cbPlayer1;
+    private JComboBox<Choice> cbPlayer2;
 
     public void initialize() {
         
@@ -40,8 +43,7 @@ public class MainFrame implements ActionListener {
         btStartGame.setFont(mainFont);
         btStartGame.addActionListener(this);
         // Add the player 1 combobox with label and validate button
-        //
-        Choices[] playerChoice = { Choices.ROCK, Choices.PAPER, Choices.SCISSOR};
+        Choice[] playerChoice = { ROCK, PAPER, SCISSOR};
         cbPlayer1 = new JComboBox<>(playerChoice);
         cbPlayer1.setVisible(false);
         lbPlayer1 = new JLabel("Player 1");
@@ -105,7 +107,7 @@ public class MainFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         Calculation calc = new Calculation();
-        Choices[] choices = { Choices.ROCK, Choices.PAPER, Choices.SCISSOR };
+        Choice[] choices = { ROCK, PAPER, SCISSOR };
 
         if(e.getSource() == btStartGame) {
             if("0 Players".equals(cbMode.getSelectedItem().toString())) {
@@ -122,9 +124,9 @@ public class MainFrame implements ActionListener {
                 lbWinner.setText(null);
 
                 
-                Choices computerChoice = choices[new Random().nextInt(choices.length)];
+                Choice computerChoice = choices[new Random().nextInt(choices.length)];
                 cbPlayer1.setSelectedItem(computerChoice);
-                Choices computerChoice2 = choices[new Random().nextInt(choices.length)];
+                Choice computerChoice2 = choices[new Random().nextInt(choices.length)];
                 cbPlayer2.setSelectedItem(computerChoice2);
                 lbWinner.setText(calc.calculateResult(computerChoice, computerChoice2));
 
@@ -175,9 +177,9 @@ public class MainFrame implements ActionListener {
                 cbPlayer2.setEnabled(false);
                 lbPlayer2.setVisible(true);
                 
-                Choices computerChoice = choices[new Random().nextInt(choices.length)];
+                Choice computerChoice = choices[new Random().nextInt(choices.length)];
                 cbPlayer2.setSelectedItem(computerChoice);
-                lbWinner.setText(calc.calculateResult((Choices) cbPlayer1.getSelectedItem(), computerChoice));
+                lbWinner.setText(calc.calculateResult((Choice) cbPlayer1.getSelectedItem(), computerChoice));
             }
             if("2 Players".equals(cbMode.getSelectedItem().toString())) {
                 cbPlayer1.setVisible(false);
@@ -200,7 +202,7 @@ public class MainFrame implements ActionListener {
                 cbPlayer2.setEnabled(false);
                 btStartGame.setVisible(true);
 
-                lbWinner.setText(calc.calculateResult((Choices) cbPlayer1.getSelectedItem(), (Choices) cbPlayer2.getSelectedItem()));
+                lbWinner.setText(calc.calculateResult((Choice) cbPlayer1.getSelectedItem(), (Choice) cbPlayer2.getSelectedItem()));
             }
         }
     }

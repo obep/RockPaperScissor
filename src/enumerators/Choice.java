@@ -1,6 +1,6 @@
 package enumerators;
 
-public enum Choices {
+public enum Choice {
     ROCK,
     PAPER,
     SCISSOR

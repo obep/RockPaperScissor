@@ -13,28 +13,27 @@ public class Calculation {
         if(choice1 == choice2) {
             return "It's a tie!";
         }
-        
-        if(choice1 == ROCK) {
+        else if(choice1 == ROCK) {
             if(choice2 == PAPER) {
                 return "Player 2 wins";
             }
-            if(choice2 == SCISSOR) {
+            else if(choice2 == SCISSOR) {
                 return "Player 1 wins";
             }
         }
-        if(choice1 == PAPER) {
+        else if(choice1 == PAPER) {
             if(choice2 == SCISSOR) {
                 return "Player 2 wins";
             }
-            if(choice2 == ROCK) {
+            else if(choice2 == ROCK) {
                 return "Player 1 wins";
             }
         }
-        if(choice1 == SCISSOR) {
+        else if(choice1 == SCISSOR) {
             if(choice2 == ROCK) {
                 return "Player 2 wins";
             }
-            if(choice2 == PAPER) {
+            else if(choice2 == PAPER) {
                 return "Player 1 wins";
             }
         }

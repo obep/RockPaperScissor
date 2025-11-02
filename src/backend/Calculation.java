@@ -37,10 +37,7 @@ public class Calculation {
         }
             
         return "There are unknown choices!";
-
     }
-
-
 
 }
 
